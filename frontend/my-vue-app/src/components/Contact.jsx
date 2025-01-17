@@ -23,11 +23,11 @@ const Contact = () => {
         <Button
     variant="contained"
     sx={{
-      backgroundColor: "#4CAF50", // Green background color
-      color: "white", // White text
+      backgroundColor: "#4CAF50",
+      color: "white",
       padding: "10px 20px",
       "&:hover": {
-        backgroundColor: "#45a049", // Darker green on hover
+        backgroundColor: "#45a049",
       },
     }}
   >
