@@ -1,5 +1,31 @@
 import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  MenuItem,
+  TextField,
+  Typography,
+  Paper,
+  Grid,
+  styled,
+} from "@mui/material";
 import axios from "axios";
+import Navbar from "../components/Navbar";
+import backgroundImage from "../assests/background.jpg";
+
+// Styled Components for Consistency
+const StyledButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "#4CAF50",
+  color: "#fff",
+  fontSize: "16px",
+  padding: theme.spacing(1.5),
+  textTransform: "none",
+  borderRadius: "8px",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+  "&:hover": {
+    backgroundColor: "#45A049",
+  },
+}));
 
 const AddTransaction = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +45,10 @@ const AddTransaction = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5050/api/transactions", formData);
+      const response = await axios.post(
+        "http://localhost:5050/api/transactions",
+        formData
+      );
       alert("Transaction added successfully!");
       setFormData({
         amount: "",
@@ -37,143 +66,150 @@ const AddTransaction = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.header}>Add Transaction</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.field}>
-          <label style={styles.label}>Amount:</label>
-          <input
-            style={styles.input}
-            type="number"
-            name="amount"
-            value={formData.amount}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={styles.field}>
-          <label style={styles.label}>Category:</label>
-          <select
-            style={styles.select}
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
+    <>
+      <Navbar />
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          padding: 3,
+        }}
+      >
+        <Paper
+          elevation={6}
+          sx={{
+            padding: 4,
+            maxWidth: 600,
+            borderRadius: 10,
+            backgroundColor: "rgb(255, 255, 255)",
+            boxShadow: "0px 8px 20px rgb(0, 94, 23)", // Transparent white for contrast
+          }}
+        >
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{ fontWeight: "bold", color: "#333" }}
           >
-            <option value="Groceries">Groceries</option>
-            <option value="Party">Party</option>
-            <option value="Food">Food</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Gaming">Gaming</option>
-            <option value="Others">Others</option>
-          </select>
-        </div>
-        <div style={styles.field}>
-          <label style={styles.label}>Type:</label>
-          <select
-            style={styles.select}
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
+            Add Transaction
+          </Typography>
+          <Typography
+            variant="body1"
+            align="center"
+            gutterBottom
+            sx={{ marginBottom: 3, color: "#666" }}
           >
-            <option value="Income">Income</option>
-            <option value="Expense">Expense</option>
-          </select>
-        </div>
-        <div style={styles.field}>
-          <label style={styles.label}>Necessity Level:</label>
-          <select
-            style={styles.select}
-            name="necessityLevel"
-            value={formData.necessityLevel}
-            onChange={handleChange}
-          >
-            <option value="Necessity">Necessity</option>
-            <option value="Comfort">Comfort</option>
-            <option value="Luxury">Luxury</option>
-          </select>
-        </div>
-        <div style={styles.field}>
-          <label style={styles.label}>Description:</label>
-          <textarea
-            style={styles.textarea}
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            maxLength="200"
-            placeholder="Add any notes or details about the transaction..."
-          />
-        </div>
-        <div style={styles.field}>
-          <label style={styles.label}>Payment Method:</label>
-          <select
-            style={styles.select}
-            name="paymentMethod"
-            value={formData.paymentMethod}
-            onChange={handleChange}
-          >
-            <option value="Cash">Cash</option>
-            <option value="Card">Card</option>
-            <option value="UPI">UPI</option>
-            <option value="Others">Others</option>
-          </select>
-        </div>
-        <button type="submit" style={styles.button}>
-          Add Transaction
-        </button>
-      </form>
-    </div>
-  );
-};
+            Keep track of your expenses and income effortlessly!
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  type="number"
+                  label="Amount"
+                  name="amount"
+                  value={formData.amount}
+                  onChange={handleChange}
+                  required
+                  InputProps={{
+                    startAdornment: <span style={{ marginRight: 8 }}>₹</span>,
+                  }}
+                />
+              </Grid>
 
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: "10px",
-    padding: "20px",
-  },
-  header: {
-    marginBottom: "20px",
-  },
-  form: {
-    width: "100%",
-    maxWidth: "500px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-  },
-  field: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  label: {
-    marginBottom: "5px",
-    fontWeight: "bold",
-  },
-  input: {
-    padding: "8px",
-    borderRadius: "4px",
-    border: "1px solid #ccc",
-  },
-  select: {
-    padding: "8px",
-    borderRadius: "4px",
-    border: "1px solid #ccc",
-  },
-  textarea: {
-    padding: "8px",
-    borderRadius: "4px",
-    border: "1px solid #ccc",
-  },
-  button: {
-    padding: "10px",
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-  },
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  select
+                  label="Category"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                >
+                  <MenuItem value="Groceries">Groceries</MenuItem>
+                  <MenuItem value="Party">Party</MenuItem>
+                  <MenuItem value="Food">Food</MenuItem>
+                  <MenuItem value="Clothing">Clothing</MenuItem>
+                  <MenuItem value="Gaming">Gaming</MenuItem>
+                  <MenuItem value="Others">Others</MenuItem>
+                </TextField>
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  select
+                  label="Type"
+                  name="type"
+                  value={formData.type}
+                  onChange={handleChange}
+                >
+                  <MenuItem value="Income">Income</MenuItem>
+                  <MenuItem value="Expense">Expense</MenuItem>
+                </TextField>
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  select
+                  label="Necessity Level"
+                  name="necessityLevel"
+                  value={formData.necessityLevel}
+                  onChange={handleChange}
+                >
+                  <MenuItem value="Necessity">Necessity</MenuItem>
+                  <MenuItem value="Comfort">Comfort</MenuItem>
+                  <MenuItem value="Luxury">Luxury</MenuItem>
+                </TextField>
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={3}
+                  label="Description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Add any notes or details about the transaction..."
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  select
+                  label="Payment Method"
+                  name="paymentMethod"
+                  value={formData.paymentMethod}
+                  onChange={handleChange}
+                >
+                  <MenuItem value="Cash">Cash</MenuItem>
+                  <MenuItem value="Card">Card</MenuItem>
+                  <MenuItem value="UPI">UPI</MenuItem>
+                  <MenuItem value="Others">Others</MenuItem>
+                </TextField>
+              </Grid>
+
+              <Grid item xs={12}>
+                <StyledButton fullWidth type="submit">
+                  Add Transaction
+                </StyledButton>
+              </Grid>
+            </Grid>
+          </form>
+        </Paper>
+      </Box>
+    </>
+  );
 };
 
 export default AddTransaction;
