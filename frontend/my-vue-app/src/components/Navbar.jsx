@@ -78,6 +78,9 @@ const Navbar = () => {
             gap: "20px",  
           }}  
         >  
+          <NavButton component={Link} to="/">  
+            Home 
+          </NavButton>  
           <NavButton component={Link} to="/add-transaction">  
             Add Transaction  
           </NavButton>  
