@@ -4,7 +4,8 @@ body {
     padding-right: 0 !important;
     font-family: "Poppins", sans-serif;
     overflow: auto !important;
-    padding-right: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
   }
   
   main {
