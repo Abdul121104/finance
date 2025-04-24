@@ -46,7 +46,7 @@ const AddTransaction = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5050/api/transactions",
+        "https://finance-khwu.onrender.com/api/transactions",
         formData
       );
       alert("Transaction added successfully!");
