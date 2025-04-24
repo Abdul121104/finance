@@ -20,7 +20,7 @@ const PieCharts = () => {
     // Fetch transactions from API
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/api/transactions");
+        const response = await axios.get("https://finance-khwu.onrender.com/api/transactions");
         setTransactions(response.data);
         setLoading(false);
       } catch (error) {
