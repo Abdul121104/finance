@@ -68,7 +68,7 @@ const Advise = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/api/transactions");
+        const response = await axios.get("https://finance-khwu.onrender.com/api/transactions");
         setTransactions(response.data);
       } catch (err) {
         console.error("Error fetching transactions:", err);
