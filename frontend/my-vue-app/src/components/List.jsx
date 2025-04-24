@@ -13,7 +13,7 @@ const List = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/api/transactions"); // Adjust the API endpoint as needed
+        const response = await axios.get("https://finance-khwu.onrender.com/api/transactions"); // Adjust the API endpoint as needed
         setTransactions(response.data);
         setVisibleTransactions(response.data.slice(0, 5)); // Show only the last 5 transactions initially
       } catch (error) {
