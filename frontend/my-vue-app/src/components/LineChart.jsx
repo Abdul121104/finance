@@ -21,7 +21,7 @@ const LineChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/api/transactions");
+      const response = await axios.get("https://finance-khwu.onrender.com/api/transactions");
       const transactions = response.data;
 
       // Filter only expenses and group them by date
